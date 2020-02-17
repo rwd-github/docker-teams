@@ -10,17 +10,31 @@ ENV LANGUAGE de_DE:de
 ENV LC_ALL de_DE.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
-ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb /root/
-
 RUN apt-get update && apt-get upgrade -y \
-	&& apt-get clean \
+	&& apt-get install -y \
+	gpg \
+	xterm
+
+ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb /root/teams.deb
+RUN	dpkg -i /root/teams.deb || true \
+	&& apt-get -f -y install
+
+RUN	apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-#	&& apt-get install -y \
-#	tmux \
+
+ADD entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
 
 #RUN unlink /etc/localtime \
 #	&& ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
-VOLUME [ "/home" ]
+RUN groupadd --gid 1000 user && \
+        useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash user
+#RUN echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+VOLUME [ "/home" ]
+USER user
+
+ENTRYPOINT [ "/entrypoint.sh" ]

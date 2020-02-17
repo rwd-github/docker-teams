@@ -14,9 +14,10 @@ function build {
 
 function run {
 	docker run -it --rm ${stdparams} \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /home/user1/alternativHome/teams/:/home \
 	--name ${imagetag} --hostname ${imagetag} ${additionalparams} ${imagetag} 
-#	-v ${mypath}/../home:/home \
-#	-p 33890:3389 \
 }
 
 
@@ -34,6 +35,10 @@ case $1 in
 	;;
 	bash)
 	additionalparams="--entrypoint /bin/bash"
+	run
+	;;
+	xterm)
+	additionalparams="--entrypoint /usr/bin/xterm"
 	run
 	;;
 	*)
