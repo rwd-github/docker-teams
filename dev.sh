@@ -17,6 +17,7 @@ function run {
     -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /home/user1/alternativHome/teams/:/home \
+	--shm-size="1gb" \
 	--name ${imagetag} --hostname ${imagetag} ${additionalparams} ${imagetag} 
 }
 

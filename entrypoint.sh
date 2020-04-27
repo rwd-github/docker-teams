@@ -1,6 +1,14 @@
 #!/bin/bash
 
-teams
+cd /root
+if [ -f "createuser.sh" ]; then
+	./createuser.sh
+fi
+myuser=$(cat /tmp/1stuser.txt)
+
+
+cd /home/${myuser}
+su -c teams ${myuser}
 #/usr/bin/xterm &
 
 # Stop script

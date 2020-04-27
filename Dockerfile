@@ -30,11 +30,15 @@ RUN chmod +x /entrypoint.sh
 #	&& ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
-RUN groupadd --gid 1000 user && \
-        useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash user
-#RUN echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+ADD createuser.sh /root/createuser.sh
+RUN chmod +x /root/createuser.sh
+
+
+#RUN groupadd --gid 1000 user && \
+#        useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash user
+##RUN echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 VOLUME [ "/home" ]
-USER user
+#USER user
 
 ENTRYPOINT [ "/entrypoint.sh" ]
