@@ -13,10 +13,13 @@ docker run -it --rm \
     --cpuset-cpus 0 \
     --device /dev/snd \
     -v /dev/shm:/dev/shm \
+    --net=host \
 	rwd1/teams
 #	--shm-size="1gb" \
 
 ```
+
+
 
 Note  for --device /dev/snd in Docker 1.8, before that you needed -v /dev/snd:/dev/snd --privileged.
 
