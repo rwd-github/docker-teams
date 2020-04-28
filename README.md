@@ -1,9 +1,5 @@
 # docker-teams
 
-* under construction
-* no audio
-
-
 
 ```
 docker run -it --rm \
@@ -20,8 +16,7 @@ docker run -it --rm \
 ```
 
 
-
-Note  for --device /dev/snd in Docker 1.8, before that you needed 
+Note --device /dev/snd in Docker 1.8, before that you needed 
 -v /dev/snd:/dev/snd --privileged
 
 
