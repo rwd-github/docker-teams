@@ -13,7 +13,20 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get upgrade -y \
 	&& apt-get install -y \
 	gpg \
-	xterm
+	xterm \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	gnupg \
+	hicolor-icon-theme \
+	libcanberra-gtk* \
+	libgl1-mesa-dri \
+	libgl1-mesa-glx \
+	libpango1.0-0 \
+	libpulse0 \
+	libv4l-0 \
+	fonts-symbola \
+	--no-install-recommends 
 
 ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb /root/teams.deb
 RUN	dpkg -i /root/teams.deb || true \
