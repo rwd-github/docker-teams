@@ -21,7 +21,8 @@ docker run -it --rm \
 
 
 
-Note  for --device /dev/snd in Docker 1.8, before that you needed -v /dev/snd:/dev/snd --privileged.
+Note  for --device /dev/snd in Docker 1.8, before that you needed 
+-v /dev/snd:/dev/snd --privileged
 
 
 mount dir with one or more homefolder. 

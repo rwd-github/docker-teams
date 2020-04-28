@@ -18,10 +18,11 @@ function run {
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /home/user1/alternativHome/teams/:/home \
     --cpuset-cpus 0 \
-    --device /dev/snd \
     -v /dev/shm:/dev/shm \
+    -v /dev/snd:/dev/snd --privileged \
     --net=host \
 	--name ${imagetag} --hostname ${imagetag} ${additionalparams} ${imagetag} 
+#    --device /dev/snd \
 }
 
 
