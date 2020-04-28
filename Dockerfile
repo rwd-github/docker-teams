@@ -26,7 +26,9 @@ RUN apt-get update && apt-get upgrade -y \
 	libpulse0 \
 	libv4l-0 \
 	fonts-symbola \
-	--no-install-recommends 
+	bluez bluez-cups bluez-obexd \
+	pulseaudio pulseaudio-module-bluetooth pulseaudio-utils 
+#	--no-install-recommends 
 
 ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb /root/teams.deb
 RUN	dpkg -i /root/teams.deb || true \
@@ -41,7 +43,8 @@ RUN chmod +x /entrypoint.sh
 
 #RUN unlink /etc/localtime \
 #	&& ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-RUN ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+RUN if [ -f /etc/localtime ]; then rm /etc/localtime; fi \
+	&& ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
 ADD createuser.sh /root/createuser.sh
 RUN chmod +x /root/createuser.sh
