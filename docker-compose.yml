@@ -3,19 +3,22 @@ version: "2.2"
 services:
   teams:
     image: rwd1/teams
-    build:
-      context: .
-      network: host
+    #build:
+      #context: .
+      #network: host
     container_name: teams
-    network: host
+    #network: host
     environment:
       - DISPLAY=$DISPLAY
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /home/user1/alternativHome/teams/:/home
       - /dev/shm:/dev/shm
-    cpuset: "0"
-    devices:
       - /dev/snd:/dev/snd
+    cpuset: "0"
+#    devices:
+#      - /dev/snd:/dev/snd
+    privileged: true
+
 
 
