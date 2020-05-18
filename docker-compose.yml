@@ -18,12 +18,12 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /home/user1/alternativHome/teams/:/home
 #      - /dev/shm:/dev/shm
-#      - /dev/snd:/dev/snd
+      - /dev/snd:/dev/snd
     shm_size: 1gb
     cpuset: "0"
-    devices:
-      - /dev/snd:/dev/snd
-#    privileged: true
+#    devices:
+#      - /dev/snd:/dev/snd
+    privileged: true
 
 
 

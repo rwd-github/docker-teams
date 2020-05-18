@@ -16,7 +16,7 @@ fi
 
 cd /home/${TEAMS_USERNAME}
 su -c teams ${TEAMS_USERNAME}
-#/usr/bin/xterm &
+#su -c "/usr/bin/xterm &" ${TEAMS_USERNAME}
 
 # Stop script
 stop_script() {

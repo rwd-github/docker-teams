@@ -8,8 +8,8 @@ if [ ! $(id -u ${TEAMS_USERNAME} 2>/dev/null) ]; then
 	addgroup --gid ${TEAMS_GID} ${TEAMS_USERNAME}
 	adduser --uid ${TEAMS_UID} --gid ${TEAMS_GID} --disabled-password ${nohome} --gecos "" ${TEAMS_USERNAME}
 	pushd /home/${TEAMS_USERNAME}
-	usermod -a -G adm ${myuser}
-	usermod -a -G sudo ${myuser}
+#	usermod -a -G adm ${TEAMS_USERNAME}
+#	usermod -a -G sudo ${TEAMS_USERNAME}
 
 	chown -R ${TEAMS_UID}:${TEAMS_GID} .
 	popd
