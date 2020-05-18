@@ -3,11 +3,7 @@ FROM ubuntu:18.04 as sysbase
 # Set the locale
 RUN apt-get update \
 	&& apt-get upgrade -y \
-	&& apt-get install -y locales \
-	&& locale-gen de_DE.UTF-8 en_US.UTF-8
-ENV LANG de_DE.UTF-8
-ENV LANGUAGE de_DE:de
-ENV LC_ALL de_DE.UTF-8
+	&& apt-get install -y locales tzdata
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y \
@@ -40,21 +36,15 @@ RUN	apt-get clean \
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-
-#RUN unlink /etc/localtime \
-#	&& ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-RUN if [ -f /etc/localtime ]; then rm /etc/localtime; fi \
-	&& ln -s /usr/share/zoneinfo/Europe/Berlin /etc/localtime
-
 ADD createuser.sh /root/createuser.sh
 RUN chmod +x /root/createuser.sh
 
-
-#RUN groupadd --gid 1000 user && \
-#        useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash user
-##RUN echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+ENV TEAMS_USERNAME=teamsuser
+ENV TEAMS_UID=1000
+ENV TEAMS_GID=1000
+ENV TEAMS_TIMEZONE=Europe/Berlin
+ENV TEAMS_LOCALE=de_DE.UTF-8
 
 VOLUME [ "/home" ]
-#USER user
 
 ENTRYPOINT [ "/entrypoint.sh" ]

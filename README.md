@@ -1,25 +1,34 @@
 # docker-teams
 
-
+docker-compose
 ```
-docker run -it --rm \
-    -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v PATHTOHOMEFOLDERS:/home \
-    --cpuset-cpus 0 \
-    --device /dev/snd \
-    -v /dev/shm:/dev/shm \
-    --net=host \
-	rwd1/teams
-#	--shm-size="1gb" \
+version: "2.2"
+
+services:
+  teams:
+    image: rwd1/teams
+    container_name: teams
+    environment:
+      - DISPLAY=$DISPLAY
+      - TEAMS_USERNAME=user1
+#      - TEAMS_UID=3001           # default= 1000
+#      - TEAMS_GID=4001           # default= 1000
+#      - TEAMS_TIMEZONE=Etc/UTC   # default= Europe/Berlin
+#      - TEAMS_LOCALE=en_US.UTF-8 # default= de_DE.UTF-8
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - [PATHTOHOMEDIR] :/home
+#      - /dev/shm:/dev/shm
+      - /dev/snd:/dev/snd
+    shm_size: 1gb
+    cpuset: "0"
+#    devices:
+#      - /dev/snd:/dev/snd
+    privileged: true
+
 
 ```
 
 
 Note --device /dev/snd in Docker 1.8, before that you needed 
 -v /dev/snd:/dev/snd --privileged
-
-
-mount dir with one or more homefolder. 
-Create a file ".mypass" with prehashed password. 
-mkpasswd -m sha-512

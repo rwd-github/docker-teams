@@ -1,29 +1,20 @@
 #!/bin/bash
 set -o errexit -o pipefail -o nounset
 
-echo "===  createuser start"
-for myuser in $(ls /home); do
-	echo "---  add user ${myuser}"
-    if [ ! -f /tmp/1stuser.txt ]; then echo ${myuser} > /tmp/1stuser.txt; fi
-	if [ ! $(id -u ${myuser}) ]; then
-		adduser --disabled-password --no-create-home --gecos "" ${myuser}
-		pushd /home/${myuser}
-		if [ -f .mypass ]; then
-			mypass=$(cat .mypass)
+echo "---  add user ${TEAMS_USERNAME}"
+if [ ! $(id -u ${TEAMS_USERNAME} 2>/dev/null) ]; then
+	nohome=""
+	if [ -d /home/${TEAMS_USERNAME} ]; then nohome=--no-create-home; fi
+	addgroup --gid ${TEAMS_GID} ${TEAMS_USERNAME}
+	adduser --uid ${TEAMS_UID} --gid ${TEAMS_GID} --disabled-password ${nohome} --gecos "" ${TEAMS_USERNAME}
+	pushd /home/${TEAMS_USERNAME}
+#	usermod -a -G adm ${myuser}
+#	usermod -a -G sudo ${myuser}
 
-			#echo ${myuser}:${mypass} | chpasswd
-			usermod -p "${mypass}" ${myuser}
-		else
-			echo " no password found"
-		fi
-		usermod -a -G adm ${myuser}
-		usermod -a -G sudo ${myuser}
+	chown -R ${TEAMS_UID}:${TEAMS_GID} .
+	popd
+else
+	echo "  user already exists."
+fi
 
-		chown -R ${myuser}:${myuser} .
-		popd
-	else
-		echo "  user already exists."
-	fi
-done
-echo "===  createuser stop"
 

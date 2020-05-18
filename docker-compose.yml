@@ -3,22 +3,27 @@ version: "2.2"
 services:
   teams:
     image: rwd1/teams
-    #build:
-      #context: .
+    build:
+      context: .
       #network: host
     container_name: teams
-    #network: host
     environment:
       - DISPLAY=$DISPLAY
+      - TEAMS_USERNAME=user1
+#      - TEAMS_UID=3001           # default= 1000
+#      - TEAMS_GID=4001           # default= 1000
+#      - TEAMS_TIMEZONE=Etc/UTC   # default= Europe/Berlin
+#      - TEAMS_LOCALE=en_US.UTF-8 # default= de_DE.UTF-8
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /home/user1/alternativHome/teams/:/home
-      - /dev/shm:/dev/shm
-      - /dev/snd:/dev/snd
-    cpuset: "0"
-#    devices:
+#      - /dev/shm:/dev/shm
 #      - /dev/snd:/dev/snd
-    privileged: true
+    shm_size: 1gb
+    cpuset: "0"
+    devices:
+      - /dev/snd:/dev/snd
+#    privileged: true
 
 
 
