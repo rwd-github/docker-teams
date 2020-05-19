@@ -32,3 +32,7 @@ services:
 
 Note --device /dev/snd in Docker 1.8, before that you needed 
 -v /dev/snd:/dev/snd --privileged
+
+
+## Resources
+https://docs.microsoft.com/en-us/microsoftteams/get-clients#linux

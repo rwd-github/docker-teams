@@ -15,8 +15,11 @@ if [ -f "createuser.sh" ]; then
 fi
 
 cd /home/${TEAMS_USERNAME}
-su -c teams ${TEAMS_USERNAME}
-#su -c "/usr/bin/xterm &" ${TEAMS_USERNAME}
+if [ "$1" == "--debug" ]; then
+	su -c "/usr/bin/xterm &" ${TEAMS_USERNAME}
+else
+	su -c teams ${TEAMS_USERNAME}
+fi
 
 # Stop script
 stop_script() {
@@ -31,5 +34,9 @@ while true
 do
     #uptime
     sleep 10
-	pgrep teams > /dev/null || exit 0
+	if [ "$1" == "--debug" ]; then
+		echo "to stop container: CTRL-C or docker stop ..."
+	else
+		pgrep teams > /dev/null || exit 0
+	fi
 done
