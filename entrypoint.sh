@@ -18,8 +18,18 @@ cd /home/${TEAMS_USERNAME}
 if [ "$1" == "--debug" ]; then
 	su -c "/usr/bin/xterm &" ${TEAMS_USERNAME}
 else
-	su -c teams ${TEAMS_USERNAME}
+	if [ "true" == "${TEAMS_INSIDERS}" ]; then 
+		su -c teams-insiders ${TEAMS_USERNAME}
+	else
+		su -c teams ${TEAMS_USERNAME}
+	fi
 fi
+
+log_2stdout() {
+	tail -f "/home/${TEAMS_USERNAME}/.config/Microsoft/Microsoft Teams/logs.txt" &
+	tail -f "/home/${TEAMS_USERNAME}/.config/Microsoft/Microsoft Teams - Insiders/logs.txt" &
+}
+log_2stdout
 
 # Stop script
 stop_script() {
