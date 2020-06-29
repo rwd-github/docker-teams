@@ -24,6 +24,6 @@ services:
 #    devices:
 #      - /dev/snd:/dev/snd
     privileged: true
-
+#    command: ["--debug"]
 
 

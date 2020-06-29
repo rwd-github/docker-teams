@@ -13,6 +13,7 @@ RUN apt-get update && apt-get upgrade -y \
 	apt-transport-https \
 	ca-certificates \
 	curl \
+	wget \
 	gnupg \
 	hicolor-icon-theme \
 	libcanberra-gtk* \
