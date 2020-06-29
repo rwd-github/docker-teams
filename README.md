@@ -15,6 +15,7 @@ services:
 #      - TEAMS_GID=4001           # default= 1000
 #      - TEAMS_TIMEZONE=Etc/UTC   # default= Europe/Berlin
 #      - TEAMS_LOCALE=en_US.UTF-8 # default= de_DE.UTF-8
+      - TEAMS_INSIDERS=false
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - [PATHTOHOMEDIR] :/home
