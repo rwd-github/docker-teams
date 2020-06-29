@@ -26,12 +26,13 @@ else
 fi
 
 log_2stdout() {
+	sleep 5
 	tail -f "/home/${TEAMS_USERNAME}/.config/Microsoft/Microsoft Teams/logs.txt" &
 	tail -f "/home/${TEAMS_USERNAME}/.config/Microsoft/Microsoft Teams/logs/teams-startup.log" &
 	tail -f "/home/${TEAMS_USERNAME}/.config/Microsoft/Microsoft Teams - Insiders/logs.txt" &
 	tail -f "/home/${TEAMS_USERNAME}/.config/Microsoft/Microsoft Teams - Insiders/logs/teams-insiders-startup.log" &
 }
-log_2stdout
+log_2stdout &
 
 # Stop script
 stop_script() {
