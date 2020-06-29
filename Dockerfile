@@ -15,6 +15,7 @@ RUN apt-get update && apt-get upgrade -y \
 	curl \
 	wget \
 	gnupg \
+	libsecret-1-0 \
 	hicolor-icon-theme \
 	libcanberra-gtk* \
 	libgl1-mesa-dri \
