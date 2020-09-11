@@ -23,9 +23,9 @@ RUN apt-get update && apt-get upgrade -y \
 	libpango1.0-0 \
 	libpulse0 \
 	libv4l-0 \
-	fonts-symbola 
-#	bluez bluez-cups bluez-obexd \
-#	pulseaudio pulseaudio-module-bluetooth pulseaudio-utils 
+	fonts-symbola \
+	bluez bluez-cups bluez-obexd \
+	pulseaudio pulseaudio-module-bluetooth pulseaudio-utils 
 #	--no-install-recommends 
 
 ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb /root/teams.deb
