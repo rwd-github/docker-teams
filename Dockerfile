@@ -24,6 +24,7 @@ RUN apt-get update && apt-get upgrade -y \
 	libpulse0 \
 	libv4l-0 \
 	fonts-symbola \
+	xdg-utils firefox \
 	bluez bluez-cups bluez-obexd \
 	pulseaudio pulseaudio-module-bluetooth pulseaudio-utils 
 #	--no-install-recommends 

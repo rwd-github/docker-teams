@@ -15,6 +15,8 @@ if [ -f "createuser.sh" ]; then
 fi
 
 cd /home/${TEAMS_USERNAME}
+su -c "gio mime x-scheme-handler/https org.mozilla.firefox.desktop" ${TEAMS_USERNAME}
+su -c "gio mime x-scheme-handler/http org.mozilla.firefox.desktop" ${TEAMS_USERNAME}
 if [ "$1" == "--debug" ]; then
 	su -c "/usr/bin/xterm &" ${TEAMS_USERNAME}
 else
