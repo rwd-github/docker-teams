@@ -33,7 +33,7 @@ RUN apt-get update && apt-get upgrade -y \
 ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb /root/teams.deb
 RUN	dpkg -i /root/teams.deb || true \
 	&& apt-get -f -y install \
-	&& apt-get update && apt-get install -y teams=${TEAMS_VERSION} teams-insiders=${TEAMS_VERSION}
+	&& apt-get update && apt-get install -y --allow-downgrades teams=${TEAMS_VERSION} teams-insiders=${TEAMS_VERSION}
 
 RUN	apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
