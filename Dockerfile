@@ -1,3 +1,4 @@
+ARG TEAMS_VERSION=1.3.00.25560
 FROM ubuntu:18.04 as sysbase
 
 # Set the locale
@@ -32,7 +33,7 @@ RUN apt-get update && apt-get upgrade -y \
 ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&arch=x64&download=true&linuxArchiveType=deb /root/teams.deb
 RUN	dpkg -i /root/teams.deb || true \
 	&& apt-get -f -y install \
-	&& apt-get update && apt-get install -y teams-insiders=1.3.00.25560
+	&& apt-get update && apt-get install -y teams=$TEAMS_VERSION teams-insiders=$TEAMS_VERSION
 
 RUN	apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
