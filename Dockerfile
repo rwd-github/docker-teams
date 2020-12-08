@@ -34,8 +34,8 @@ ADD https://teams.microsoft.com/downloads/desktopurl?env=production&plat=linux&a
 RUN	dpkg -i /root/teams.deb || true \
 	&& apt-get -f -y install \
 	&& apt-get update \
-	&& apt-cache policy teams teams-insiders
-	&& TEAMS_VER=${TEAMS_VERSION} && if [ -n ${TEAMS_VER} ]; then TEAMS_VER="=${TEAMS_VER}"; fi && echo TEAMS_VER=${TEAMS_VER}
+	&& apt-cache policy teams teams-insiders \
+	&& TEAMS_VER=${TEAMS_VERSION} && if [ -n ${TEAMS_VER} ]; then TEAMS_VER="=${TEAMS_VER}"; fi && echo TEAMS_VER=${TEAMS_VER} \
 	&& apt-get install -y --allow-downgrades teams${TEAMS_VER} teams-insiders${TEAMS_VER}
 
 RUN	apt-get clean \
