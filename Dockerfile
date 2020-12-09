@@ -1,5 +1,6 @@
 FROM ubuntu:18.04 as sysbase
-ARG TEAMS_VERSION=1.3.00.25560
+#ARG TEAMS_VERSION=1.3.00.25560
+ARG TEAMS_VERSION
 
 # Set the locale
 RUN apt-get update \
